@@ -217,7 +217,7 @@ public final class HttpBurstNodeService implements BurstNodeService {
     @Override
     public Single<byte[]> generateTransactionWithMessage(BurstAddress recipient, byte[] senderPublicKey, BurstValue amount, BurstValue fee, int deadline, String message) {
         return assign(burstAPIService.sendMoney(BurstKitUtils.getEndpoint(), recipient.getID(), null,
-                amount.toPlanck().toString(), null, Hex.toHexString(senderPublicKey), fee.toPlanck().toString(),
+                amount != null ? amount.toPlanck().toString() : null, null, Hex.toHexString(senderPublicKey), fee.toPlanck().toString(),
                 deadline, null, false, message, true, null, null, null, null, null, null, null, null))
                         .map(response -> Hex.decode(response.getUnsignedTransactionBytes()));
     }
@@ -233,7 +233,7 @@ public final class HttpBurstNodeService implements BurstNodeService {
     @Override
     public Single<byte[]> generateTransactionWithMessage(BurstAddress recipientAddress, byte[] recipientPublicKey, byte[] senderPublicKey, BurstValue amount, BurstValue fee, int deadline, String message) {
         return assign(burstAPIService.sendMoney(BurstKitUtils.getEndpoint(), recipientAddress.getID(), Hex.toHexString(recipientPublicKey),
-                amount.toPlanck().toString(), null, Hex.toHexString(senderPublicKey), fee.toPlanck().toString(),
+                amount != null ? amount.toPlanck().toString() : null, null, Hex.toHexString(senderPublicKey), fee.toPlanck().toString(),
                 deadline, null, false, message, true, null, null, null, null, null, null, null, null))
                         .map(response -> Hex.decode(response.getUnsignedTransactionBytes()));
     }
@@ -250,7 +250,7 @@ public final class HttpBurstNodeService implements BurstNodeService {
     @Override
     public Single<byte[]> generateTransactionWithMessage(BurstAddress recipient, byte[] senderPublicKey, BurstValue amount, BurstValue fee, int deadline, byte[] message) {
         return assign(burstAPIService.sendMoney(BurstKitUtils.getEndpoint(), recipient.getID(), null,
-                amount.toPlanck().toString(), null, Hex.toHexString(senderPublicKey), fee.toPlanck().toString(),
+                amount != null ? amount.toPlanck().toString() : null, null, Hex.toHexString(senderPublicKey), fee.toPlanck().toString(),
                 deadline, null, false, Hex.toHexString(message), false, null, null, null, null, null, null, null, null))
                         .map(response -> Hex.decode(response.getUnsignedTransactionBytes()));
     }
